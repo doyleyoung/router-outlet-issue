@@ -1,0 +1,41 @@
+<ion-content>
+  <ion-split-pane contentId="pages-content">
+    <ion-menu contentId="pages-content" type="overlay">
+      <ion-content>
+
+        <ion-list id="pages-list">
+          <ion-list-header>Ion Router Outlet Issue</ion-list-header>
+          <ion-note>
+            Although the app seems to accept the links routerLink from both Test Link button and Add item,
+            in no case the expected routed page is loaded. When comparing this with Angular behaviour,
+            such scenario should work just fine. Any idea what may be wrong with this sample code or is
+            this a legit bug?
+          </ion-note>
+
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index; last as isLast; first as isFirst">
+
+            <ion-button *ngIf="isFirst" expand="block"
+                        [routerLink]="[{ outlets: { secondary: ['folder', 'Add']} }]"
+                        routerDirection="forward"
+            >Test Link</ion-button>
+
+            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+
+            <ion-item *ngIf="isLast" (click)="logout()">
+              <ion-icon slot="start" [ios]="'log-out-outline'" [md]="'log-out-sharp'"></ion-icon>
+              <ion-label>Logout</ion-label>
+            </ion-item>
+
+          </ion-menu-toggle>
+        </ion-list>
+
+      </ion-content>
+    </ion-menu>
+
+    <ion-router-outlet id="pages-content" name="secondary"></ion-router-outlet>
+
+  </ion-split-pane>
+</ion-content>
