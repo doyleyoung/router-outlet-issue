@@ -6,12 +6,19 @@ import { DashboardPage } from './dashboard.page';
 const routes: Routes = [
   {
     path: '',
-    component: DashboardPage
-  },
-  {
-    path: 'folder/Add',
-    loadChildren: () => import('../../pages/add-event/add-event.module').then(m => m.AddEventPagePageModule),
-    outlet: 'secondary'
+    children: [
+      {
+        path: 'show',
+        component: DashboardPage,
+        children: [
+          {
+            path: 'folder/Add',
+            loadChildren: () => import('../../pages/add-event/add-event.module').then(m => m.AddEventPagePageModule),
+            outlet: 'secondary'
+          },
+        ]
+      }
+    ]
   },
 ];
 

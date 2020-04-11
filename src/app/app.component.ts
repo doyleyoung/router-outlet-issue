@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
           '',
           {
             outlets: {
-              primary: ['members', 'dashboard']
+              primary: ['members', 'dashboard', 'show']
             }
           }
         ]);
